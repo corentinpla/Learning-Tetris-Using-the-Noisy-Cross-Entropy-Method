@@ -1,1 +1,1 @@
-# Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method
+# Learning Tetris Using the Noisy Cross Entropy Method
