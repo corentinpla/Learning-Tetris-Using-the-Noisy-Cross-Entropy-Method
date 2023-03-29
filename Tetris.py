@@ -168,15 +168,15 @@ while not done:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP: #flèche du haut pour tourner la pièce 
                 game.rotate()
-            if event.key == pygame.K_DOWN: 
+            if event.key == pygame.K_DOWN: #flèche du bas pour aller un cran en bas 
                 pressing_down = True
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT: #flèche droite pour aller à droite 
                 game.go_side(-1)
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT: #flèche gauche pour aller à gauche 
                 game.go_side(1)
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE: #barre espace pour aller en bas 
                 game.go_space()
-            if event.key == pygame.K_ESCAPE:
+            if event.key == pygame.K_ESCAPE: 
                 game.__init__(20, 10)
 
     if event.type == pygame.KEYUP:

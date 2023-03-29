@@ -1,42 +1,15 @@
 from __future__ import print_function
-import os
-import neat
-import Tetris as T
+#import os
+#import neat
+import Tetris
 import pygame
-import multiprocessing
-import time
-
-Core = 0
-
-def Run(config_file):
-    # On charge la configuration qu'utilisera notre intelligence artificielle pour sa reproduction.
-    config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
-                         neat.DefaultSpeciesSet, neat.DefaultStagnation,
-                         config_file)
-
-    # On crée notre population, qui est l'objet le plus important lorsque l'on utilise NEAT.
-    p = neat.Population(config)
-    # On crée un rapporteur d'écart-type pour montrer la progression de nos générations dans le terminal.
-    p.add_reporter(neat.StdOutReporter(True))
-    stats = neat.StatisticsReporter()
-    p.add_reporter(stats)
-    p.add_reporter(neat.Checkpointer(5))
-    corecount = 1
-    if Core == 0:
-        corecount = multiprocessing.cpu_count()
-    else:
-        corecount = Core
-    pe = neat.ParallelEvaluator(corecount, evaluation_genome)
-    # On choisit de l'exécuter pour 1000 générations.
-    winner = p.run(pe.evaluate, 1000)
-
-    # On affiche le meilleur génome.
-    print('\nBest genome:\n{!s}'.format(winner))
+#import multiprocessing
+#import time
 
 
+#21 features functions 
 
-# Les 5 fonctions suivantes servent à déterminer l'évolution de la partie à chaque action de l'IA et donc à la noter plus tard.
-def plus_haut_bloc(grille):
+def maximum_height(field):
     ind = len(grille)
     for j in range(len(grille)):
         row = grille[j]
@@ -45,6 +18,15 @@ def plus_haut_bloc(grille):
                 return ind
         ind -= 1
     return ind
+
+def column_height(grille):
+    h=[]
+    for j in range(10):
+        column=[grille[i][j] for i in range(20)] 
+
+        for square in column :
+
+
 
 
 def trous_ajoutees(grille): #cette fonction sert à déterminer le nombre de trous qui ont été ajoutés, c'est-à-dire le nombre d'espaces inaccessibles car recouverts
@@ -56,20 +38,22 @@ def trous_ajoutees(grille): #cette fonction sert à déterminer le nombre de tro
                 count += 1
     return count
 
-def verticalite(grille):#cette fonction sert à déterminer la différence de hauteur entre deux colonnes adjacentes.
+def column_difference(grille):# absolute difference between adjacent columns
     c = 0
+    dh=[]
     for j in range (9):
         a,b = 0,0
-        column1 = [grille[i][j] for i in range(20)] # On prend nos deux colonnes adjacentes et on compte le nombre de blocs qui y sont présents.
+        column1 = [grille[i][j] for i in range(20)] 
         column2 = [grille[i][j+1] for i in range(20)]
         for espace in column1:
-            if espace != (0,0,0):
+            if espace != (0,0,0): 
                 a += 1
         for espace in column2:
             if espace != (0,0,0):
                 b += 1
         c += abs(b-a)
-    return c #on renvoie la somme des valeurs absolues des différences.
+        dh.append(c)
+    return dh 
 
 def colonnes_vide(grille): # Cette fonction porte bien son nom.
     c = 0
