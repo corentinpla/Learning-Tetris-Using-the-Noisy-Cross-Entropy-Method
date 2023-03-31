@@ -68,8 +68,11 @@ class Tetris:
                 new_line.append(0)
             self.field.append(new_line)
 
-    def new_figure(self,type,color):
-        self.figure = Figure(3, 0,type,color) #type et color doivent être randomisés
+    def new_figure(self,type,x,y):
+        self.figure = Figure(3, 0,type) #type et color doivent être randomisés
+
+    def new_figure_intersect(self,type,x,y):
+
 
     def intersects(self): #check if the currently flying figure intersecting with something fixed on the field. 
         intersection = False
@@ -82,6 +85,7 @@ class Tetris:
                             self.field[i + self.figure.y][j + self.figure.x] > 0:
                         intersection = True
         return intersection
+        
 
     def break_lines(self): #checking an detroying full lines
         lines = 0
@@ -102,12 +106,6 @@ class Tetris:
             self.figure.y += 1
         self.figure.y -= 1
         self.freeze()
-
-    def go_down(self):
-        self.figure.y += 1
-        if self.intersects():
-            self.figure.y -= 1
-            self.freeze()
 
     def freeze(self): #If it moves down and intersects, then this means we have reached the bottom, so we need to “freeze” the figure on our field:
         for i in range(4):
@@ -130,6 +128,12 @@ class Tetris:
         self.figure.rotate()
         if self.intersects():
             self.figure.rotation = old_rotation
+
+
+def evaluate_best_move(W, h,dh, H, L):
+    game_copy=Tetris(20,10)
+    game_copy.field=field
+
 
 
 # Initialize the game engine
