@@ -211,9 +211,8 @@ def simulation_without_graphic(W):
 
 
     game = Tetris(20, 10)
-    counter = 0
-
     while game.state!="gameover":
+
 
         fig=random.randint(0,6)
         game.new_figure(fig,3,0)
@@ -221,7 +220,6 @@ def simulation_without_graphic(W):
             game.state="gameover"
 
         col, rot = evaluate_best_move(W,game.field,fig)
-        
         game.rotate(rot)
         game.go_side(col)
         game.go_space()
