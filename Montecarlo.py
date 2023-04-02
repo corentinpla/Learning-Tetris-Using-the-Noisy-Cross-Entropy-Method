@@ -3,9 +3,9 @@ from scipy import stats
 import sys
 sys.path.append("/home/leo/Programmation/Python/MonteCarlo")
 from scipy.optimize import minimize
-import Tetris
+import Tetris_final as Tetris
 # Initialisation
-mu0 = [0]*21
+mu0 = [5]*21
 sigma0 = np.diag([100]*21)
 V0 = (mu0, sigma0)
 parameters = [V0]

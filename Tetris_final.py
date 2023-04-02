@@ -208,6 +208,7 @@ def evaluate_best_move(W,field,type):
 
 
 def simulation_without_graphic(W):
+    W=[max(W[k],0)for k in range(len(W))]
 
 
     game = Tetris(20, 10)
@@ -224,5 +225,8 @@ def simulation_without_graphic(W):
         game.go_side(col)
         game.go_space()
 
+    print(game.score)
+
             
     return(game.score)
+
