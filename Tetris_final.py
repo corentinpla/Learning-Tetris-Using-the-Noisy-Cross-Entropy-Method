@@ -2,22 +2,12 @@ import numpy
 import random
 import copy 
 
-colors = [
-    (0, 0, 0),
-    (120, 37, 179),
-    (100, 179, 179),
-    (80, 34, 22),
-    (80, 134, 22),
-    (180, 34, 22),
-    (180, 34, 122),
-]
-
 
 class Figure:
     x = 0
     y = 0
-
-    figures = [
+#liste des 6 différentes figures et leur rotation
+    figures = [ 
         [[1, 5, 9, 13], [4, 5, 6, 7]],
         [[4, 5, 9, 10], [2, 6, 5, 9]],
         [[6, 7, 9, 10], [1, 5, 6, 10]],
@@ -27,26 +17,27 @@ class Figure:
         [[1, 2, 5, 6]],
     ]
 
-    def __init__(self, x, y, type, color): #type : integer 0<7 #color : integer 0<7
-        self.x = x
-        self.y = y
-        self.type = type #introduire random dans la classe Tetris 
-        self.color = color #introduire random dans la classe Tetris 
-        self.rotation = 0
+    def __init__(self, x, y, type, color): 
+        self.x = x #position de la pièce sur la largeur du jeu 
+        self.y = y #position de la pièce sur la longueur du jeu
+        self.type = type #type de la pièce entre 1 et 6
+        self.rotation = 0 #rotatio de la pièce
 
+    #séléction de la pièce (type et rotation) dans la liste figures
     def image(self):
         return self.figures[self.type][self.rotation]
-
+    
+    #méthode pour faire pivoter la pièce
     def rotate(self,k):
         self.rotation = (self.rotation + k) % len(self.figures[self.type])
 
 class Tetris:
-    def __init__(self, height, width):
-        self.score = 0
-        self.state = "start" #tell us if we are still playing or not
-        self.field = []
-        self.height = 0
-        self.width = 0
+    def __init__(self, height, width): #initialisation du jeu 
+        self.score = 0 #score du jeu 
+        self.state = "start" #état du jeu (gameover si le jeu est fini)
+        self.field = [] # grille de jeu
+        self.height = 0 #hauteur du jeu
+        self.width = 0 #largeur du jeu 
         self.x = 100
         self.y = 60
         self.figure = None
@@ -57,7 +48,7 @@ class Tetris:
         self.score = 0
         self.state = "start"
 
-        for i in range(height): # create a field with the size height x width 
+        for i in range(height): # creation de la grille de taille height x width 
             new_line = []
 
             for j in range(width):
@@ -66,7 +57,7 @@ class Tetris:
             self.field.append(new_line)
 
     def new_figure(self,type,x,y):
-        self.figure = Figure(x, y,type,color=2) #type et color doivent être randomisés
+        self.figure = Figure(x, y,type,color=2) #introduction d'une nouvelle figure type en (x,y) 
 
     def intersects(self): #check if the currently flying figure intersecting with something fixed on the field. 
         intersection = False
@@ -82,7 +73,7 @@ class Tetris:
 
 
 
-    def break_lines(self): #checking an detroying full lines
+    def break_lines(self): #checking and detroying full lines
         lines = 0
         for i in range(1, self.height):
             zeros = 0
@@ -96,7 +87,7 @@ class Tetris:
                         self.field[i1][j] = self.field[i1 - 1][j]
         self.score += lines ** 2
 
-    def go_space(self):
+    def go_space(self): #descend la pièce jusqu'en bas 
         while not self.intersects():
             self.figure.y += 1
         self.figure.y -= 1
@@ -109,7 +100,7 @@ class Tetris:
                     self.field[i + self.figure.y][j + self.figure.x] = self.figure.color
         self.break_lines()
 
-    def go_side(self, dx):
+    def go_side(self, dx): #decale la pièce de dx (gauche si dx<0 droite sinon)
         old_x = self.figure.x
         self.figure.x += dx
         if self.intersects():
@@ -122,7 +113,8 @@ class Tetris:
             self.figure.rotation = old_rotation
 
 
-
+#Features du jeu 
+#retourne la taille des 10 colonnes du jeu 
 def column_height(field): #from top to bottom
     h=[]
     for j in range(10):
@@ -136,11 +128,11 @@ def column_height(field): #from top to bottom
 
     return(h)
 
-
+#retourne la taille maximale des colonnes du jeu 
 def maximum_height(field):
     return(max(column_height(field)))
 
-
+#retourne la différence en valeur absolue de la taille d'une colonne avec celle de sa voisine 
 def column_difference(field):# absolute difference between adjacent columns
     df=[]
     h=column_height(field)
@@ -149,7 +141,7 @@ def column_difference(field):# absolute difference between adjacent columns
         df.append(abs(h[j+1]-h[j]))
     
     return(df)
-
+#compte le nombre de troux inaccessibles du jeu 
 def holes(field):
     L=0
     h=column_height(field)
@@ -162,7 +154,7 @@ def holes(field):
     return(L)
 
 
-
+#Evalue la configuration de la grille en pondérant les features par le vecteur W de taille 21
 def evaluate(W, field): 
     #W=[w1, ..., w21] vector of parameters to tune 
 
@@ -185,7 +177,7 @@ def evaluate(W, field):
 
     return(S1+S2+S3+S4)
 
-
+#pour une configuration et une nouvelle piece donné, retourne le meilleur coup au sens de evaluate()
 def evaluate_best_move(W,field,type):
     L=[]
     score=[]
@@ -206,7 +198,7 @@ def evaluate_best_move(W,field,type):
     best_move=score.index(min(score))
     return(L[best_move])
 
-
+#simule une partie 
 def simulation_without_graphic(W):
     W=[max(W[k],0)for k in range(len(W))]
 
