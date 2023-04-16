@@ -19,6 +19,7 @@ def simulation_CE_const_noise(alpha, N_mean, N_iteration,rho,noise): #alpha : ta
     V0 = (mu0, sigma0)
     parameters = [V0]
     L_plot=[]
+    t=1
 
 
     for j in range (N_iteration):
@@ -43,10 +44,11 @@ def simulation_CE_const_noise(alpha, N_mean, N_iteration,rho,noise): #alpha : ta
 
             sample_list.append(sample)
             sample_mean.append(np.mean(score_mean))
+            print(np.mean(score_mean))
             
 
         # Keeping the rho*N bests vectors
-        k=floor(N*rho)
+        k=math.floor(N*rho)
 
         indices=sorted(range(len(sample_mean)), key=lambda i: sample_mean[i], reverse=True)[:k]
         sample_high = [sample_list[i] for i in indices]
@@ -86,6 +88,7 @@ def simulation_CE_deacr_noise(alpha, N_mean, N_iteration,rho,a,b): #alpha : taux
     V0 = (mu0, sigma0)
     parameters = [V0]
     L_plot=[]
+    t=1
 
 
     for j in range (N_iteration):
@@ -101,6 +104,7 @@ def simulation_CE_deacr_noise(alpha, N_mean, N_iteration,rho,a,b): #alpha : taux
         sample_mean = []
 
         for i in range(N):
+
             
             sample = distribution.rvs() #vecteur de paramètre W
             score_mean=[] #liste qui va contenir la moyenne des scores pour W sur N_mean parties
@@ -111,9 +115,9 @@ def simulation_CE_deacr_noise(alpha, N_mean, N_iteration,rho,a,b): #alpha : taux
             sample_list.append(sample)
             sample_mean.append(np.mean(score_mean))
             
-
+            print(np.mean(score_mean))
         # Keeping the rho*N bests vectors
-        k=floor(N*rho)
+        k=math.floor(N*rho)
 
         indices=sorted(range(len(sample_mean)), key=lambda i: sample_mean[i], reverse=True)[:k]
         sample_high = [sample_list[i] for i in indices]
