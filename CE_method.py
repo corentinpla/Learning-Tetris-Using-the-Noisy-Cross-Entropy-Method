@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 
 
 def simulation_CE(alpha, N_iteration,rho): #alpha : taux d'actualistion 
-                              
                                #N_iteration : nombre d'iterations
                                #rho : the fraction of verctors that are selected
                                #retourne L_plot : le score maximal par itération
@@ -37,11 +36,9 @@ def simulation_CE(alpha, N_iteration,rho): #alpha : taux d'actualistion
         for i in range(N):
             
             sample = distribution.rvs() #vecteur de paramètre W
-            
-
             sample_score.append(Tetris.simulation_without_graphic(sample))
             sample_list.append(sample)
-            
+            print(sample_score[-1])
 
         # Keeping the rho*N bests vectors
         k=math.floor(N*rho)
@@ -57,16 +54,16 @@ def simulation_CE(alpha, N_iteration,rho): #alpha : taux d'actualistion
 
         res = (mean, cov)
         print(np.linalg.norm(cov))
-
         parameters.append((alpha * np.array(res[0]) + (1 - alpha) * np.array(parameters[-1][0]),
                         alpha ** 2 * np.array(res[1]) + (1 - alpha) ** 2 * np.array(parameters[-1][1])))    
-
+        L_mean=[]
         for k in range (30):
             L_mean.append(Tetris.simulation_without_graphic(best_sample))
 
 
         L_plot.append(np.mean(L_mean))
         t+=1
+        print(L_plot)
     
     return(L_plot,(mean, cov))
 
