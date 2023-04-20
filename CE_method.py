@@ -20,6 +20,7 @@ def simulation_CE(alpha, N_iteration,rho): #alpha : taux d'actualistion
     parameters = [V0]
     t=1
     L_plot=[]
+    L_norm=[]
 
     for j in range (N_iteration):
 
@@ -53,17 +54,19 @@ def simulation_CE(alpha, N_iteration,rho): #alpha : taux d'actualistion
         cov =  np.cov(sample_high, rowvar = False,bias=True)
 
         res = (mean, cov)
-        print(np.linalg.norm(cov))
+        L_norm.append(np.linalg.norm(cov))
+        print(L_norm)
         parameters.append((alpha * np.array(res[0]) + (1 - alpha) * np.array(parameters[-1][0]),
                         alpha ** 2 * np.array(res[1]) + (1 - alpha) ** 2 * np.array(parameters[-1][1])))    
-        L_mean=[]
-        for k in range (30):
+        
+        L_mean=[sample_score[indices[0]]]
+        for k in range (29):
             L_mean.append(Tetris.simulation_without_graphic(best_sample))
 
-
-        L_plot.append(np.mean(L_mean))
+        print(L_mean)
+        L_plot.append(L_mean)
         t+=1
         print(L_plot)
     
-    return(L_plot,(mean, cov))
+    return(L_plot,L_norm,(mean, cov))
 
