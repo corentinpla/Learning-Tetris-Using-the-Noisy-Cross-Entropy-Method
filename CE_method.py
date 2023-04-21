@@ -63,10 +63,9 @@ def simulation_CE(alpha, N_iteration,rho): #alpha : taux d'actualistion
         for k in range (29):
             L_mean.append(Tetris.simulation_without_graphic(best_sample))
 
-        print(L_mean)
+        print(np.mean(L_mean))
         L_plot.append(L_mean)
         t+=1
-        print(L_plot)
     
     return(L_plot,L_norm,(mean, cov))
 

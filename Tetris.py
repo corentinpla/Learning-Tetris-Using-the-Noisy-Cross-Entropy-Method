@@ -1,6 +1,7 @@
 import numpy
 import random
 import copy 
+import matplotlib.pyplot as plt
 
 
 class Figure:
@@ -216,6 +217,13 @@ def simulation_without_graphic(W):
         game.rotate(rot)
         game.go_side(col)
         game.go_space()
+        fig, ax = plt.subplots()
+
+        # Create a colored grid using matshow() function
+        ax.matshow(game.field, cmap='Blues')
+
+        # Display the grid
+        plt.show()      
 
 
             
