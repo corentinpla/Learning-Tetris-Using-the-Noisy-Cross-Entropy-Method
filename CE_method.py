@@ -11,14 +11,14 @@ import matplotlib.pyplot as plt
 def simulation_CE(alpha, N_iteration,rho): #alpha : taux d'actualistion 
                                #N_iteration : nombre d'iterations
                                #rho : the fraction of verctors that are selected
-                               #retourne L_plot : le score maximal par itération
     
     # Initialisation
-    mu0 = [5]*21
+    mu0 = [0]*21
     sigma0 = np.diag([100]*21)
     V0 = (mu0, sigma0)
     parameters = [V0]
     t=1
+
     L_plot=[]
     L_norm=[]
 
@@ -37,9 +37,9 @@ def simulation_CE(alpha, N_iteration,rho): #alpha : taux d'actualistion
         for i in range(N):
             
             sample = distribution.rvs() #vecteur de paramètre W
-            sample_score.append(Tetris.simulation_without_graphic(sample))
+            sample_score.append(Tetris.simulation(sample))
             sample_list.append(sample)
-            print(sample_score[-1])
+            
 
         # Keeping the rho*N bests vectors
         k=math.floor(N*rho)
@@ -54,18 +54,21 @@ def simulation_CE(alpha, N_iteration,rho): #alpha : taux d'actualistion
         cov =  np.cov(sample_high, rowvar = False,bias=True)
 
         res = (mean, cov)
-        L_norm.append(np.linalg.norm(cov))
-        print(L_norm)
+        L_norm.append(np.linalg.norm(cov)) #norme 2 de la matrice de covariance
+
         parameters.append((alpha * np.array(res[0]) + (1 - alpha) * np.array(parameters[-1][0]),
                         alpha ** 2 * np.array(res[1]) + (1 - alpha) ** 2 * np.array(parameters[-1][1])))    
         
-        L_mean=[sample_score[indices[0]]]
+        #calcul de la moyenne du meilleur vecteur sur 30 parties
+        L_mean=[sample_score[indices[0]]] #liste des scores des 30 simulations
         for k in range (29):
-            L_mean.append(Tetris.simulation_without_graphic(best_sample))
+            L_mean.append(Tetris.simulation(best_sample))
 
         print(np.mean(L_mean))
         L_plot.append(L_mean)
         t+=1
-    
+        print(L_plot,L_norm,(mean, cov))
     return(L_plot,L_norm,(mean, cov))
-
+    #L_plot : liste de liste des scores de 30 simulations pour le meilleur vecteur 
+    #L_norm : norme 2 de la matrice au cours du temps 
+    #(mean,cov) : paramètres retenus (cov : matrice nulle à la convergence)

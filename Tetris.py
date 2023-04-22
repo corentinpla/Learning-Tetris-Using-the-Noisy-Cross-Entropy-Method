@@ -2,6 +2,7 @@ import numpy
 import random
 import copy 
 import matplotlib.pyplot as plt
+import imageio
 
 
 class Figure:
@@ -200,7 +201,7 @@ def evaluate_best_move(W,field,type,color):
     return(L[best_move])
 
 #simule une partie 
-def simulation_without_graphic(W):
+def simulation(W):
 
 
     game = Tetris(20, 10)
@@ -216,7 +217,6 @@ def simulation_without_graphic(W):
         game.rotate(rot)
         game.go_side(col)
         game.go_space(color)
-        print(game.score)
 
 
     return(game.score)
@@ -224,7 +224,7 @@ def simulation_without_graphic(W):
 def simulation_gif(W):
     L=[]
 
-    game = T.Tetris(20, 10)
+    game = Tetris(20, 10)
     while game.state!="gameover":
 
 
@@ -248,7 +248,7 @@ def simulation_gif(W):
 
 
 def get_gif (L): #L: list of figures
-    with imageio.get_writer('my_gif.gif', mode='I') as writer:
+    with imageio.get_writer('tetris.gif', mode='I') as writer:
 
         for fig in L:
             fig.canvas.draw()
