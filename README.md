@@ -7,7 +7,6 @@ The cross-entropy method is an efficient and general optimization algorithm. How
 * `CE_method.py` implements the classical cross-entropy method optimizer.
 * `CE_method_with_noise.py` implements the Noisy cross-entropy method (constant & decreasing noise).
 * `Simulated_annealing.py` implements the simulated annealing optimizer. 
-* `Main.ipynb` to run full code.
 # Tetris controller
 Following the approach of Thiery and Scherrer [2], we shall learn state-value functions that are linear combination of 21 basis functions.
 
@@ -42,6 +41,7 @@ An awesome illustration to understand this principle for $w=(w_1,w_2)$ is propos
 
 ## Cross entropy with constant noise 
 ## Simulated annealing
+# Further improvements
 # Bibliography 
 * [1] [Learning Tetris Using the Noisy Cross-Entropy Method](https://www.researchgate.net/publication/6743957_Learning_Tetris_Using_the_Noisy_Cross-Entropy_Method), I. Szita , A. Lorincz 
 * [2] [Improvements on Learning Tetris with Cross Entropy](https://inria.hal.science/inria-00418930/document), Christophe Thiery, Bruno Scherrer, INRIA
