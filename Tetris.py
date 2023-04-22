@@ -88,17 +88,17 @@ class Tetris:
                         self.field[i1][j] = self.field[i1 - 1][j]
         self.score += lines ** 2
 
-    def go_space(self): #descend la pièce jusqu'en bas 
+    def go_space(self,color): #descend la pièce jusqu'en bas 
         while not self.intersects():
             self.figure.y += 1
         self.figure.y -= 1
-        self.freeze()
+        self.freeze(color)
 
-    def freeze(self): #If it moves down and intersects, then this means we have reached the bottom, so we need to “freeze” the figure on our field:
+    def freeze(self,color): #If it moves down and intersects, then this means we have reached the bottom, so we need to “freeze” the figure on our field:
         for i in range(4):
             for j in range(4):
                 if i * 4 + j in self.figure.image():
-                    self.field[i + self.figure.y][j + self.figure.x] = 1
+                    self.field[i + self.figure.y][j + self.figure.x] = color
         self.break_lines()
 
     def go_side(self, dx): #decale la pièce de dx (gauche si dx<0 droite sinon)
@@ -179,20 +179,20 @@ def evaluate(W, field):
     return(S1+S2+S3+S4)
 
 #pour une configuration et une nouvelle piece donné, retourne le meilleur coup au sens de evaluate()
-def evaluate_best_move(W,field,type):
+def evaluate_best_move(W,field,type,color):
     L=[]
     score=[]
-    for col in range (-5,10):
-        for k in range (4):
+    for k in range (4):
+        for col in range (-5,10):
+        
             game_copy=Tetris(20,10)
             
             game_copy.field=copy.deepcopy(field)
-            #point_before=game_copy.score
+
             game_copy.new_figure(type,3,0)
-            game_copy.go_side(col)
-            game_copy.rotate(k) #test intersect deja fait dans la methode rotate
-            game_copy.go_space()
-            #point=game_copy.score
+            game_copy.rotate(k)
+            game_copy.go_side(col) 
+            game_copy.go_space(color)
             score.append(evaluate(W,game_copy.field))
             L.append([col,k])
     
@@ -201,31 +201,56 @@ def evaluate_best_move(W,field,type):
 
 #simule une partie 
 def simulation_without_graphic(W):
-    #W=[max(W[k],0)for k in range(len(W))]
 
 
     game = Tetris(20, 10)
     while game.state!="gameover":
 
-
         fig=random.randint(0,6)
+        color=1
         game.new_figure(fig,3,0)
         if game.intersects():
             game.state="gameover"
 
-        col, rot = evaluate_best_move(W,game.field,fig)
+        col, rot = evaluate_best_move(W,game.field,fig,color)
         game.rotate(rot)
         game.go_side(col)
-        game.go_space()
-        fig, ax = plt.subplots()
-
-        # Create a colored grid using matshow() function
-        ax.matshow(game.field, cmap='Blues')
-
-        # Display the grid
-        plt.show()      
+        game.go_space(color)
+        print(game.score)
 
 
-            
     return(game.score)
 
+def simulation_gif(W):
+    L=[]
+
+    game = T.Tetris(20, 10)
+    while game.state!="gameover":
+
+
+        fig=random.randint(0,6)
+        color=random.randint(1,4)
+        game.new_figure(fig,3,0)
+        if game.intersects():
+            game.state="gameover"
+
+        col, rot = evaluate_best_move(W,game.field,fig,color)
+        game.rotate(rot)
+        game.go_side(col)
+        game.go_space(color)
+        
+        fig, ax = plt.subplots()
+        ax.set_title(str(game.score))
+        ax.matshow(game.field, cmap='Blues')
+        L.append(fig)
+
+    return(L)  
+
+
+def get_gif (L): #L: list of figures
+    with imageio.get_writer('my_gif.gif', mode='I') as writer:
+
+        for fig in L:
+            fig.canvas.draw()
+            image = imageio.core.asarray(fig.canvas.renderer.buffer_rgba())
+            writer.append_data(image)
