@@ -14,6 +14,8 @@ Following the approach of Thiery and Scherrer [2], we shall learn state-value fu
 
 The value function : 
 
+$V_w(s):=\sum_{i=1}^{10} w_i \h_i(s) + \sum_{i=1}^{9} w_{10+i} \Delta h_i(s)+ w_20L+w_21H$
+
 
 
 # Optimizer
