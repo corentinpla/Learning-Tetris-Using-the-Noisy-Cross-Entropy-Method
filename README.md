@@ -24,7 +24,7 @@ $$
 V_w(s):=\sum_{i=1}^{10} w_i h_i(s) + \sum_{i=1}^{9} w_{10+i}\Delta h_i(s) + w_{20}L + w_{21}H
 $$
 
-where $s$ denotes a Tetris state and $w=(w_1,w_2,...,w_{21})$ the weight vector to optimize.
+where $s$ denotes a Tetris state and $w=(w_1,w_2,...,w_{21})$ the weight under which optimize.
 
 # Optimizer
 ## Cross entropy 
