@@ -26,7 +26,7 @@ $$
 
 where $s$ denotes a Tetris state and $w=(w_1,w_2,...,w_{21})$ the weight under which optimize.
 
-![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/tree/main/Figures/first_200.gif)
+![First 200 cleared rows for an optimized weight](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/first_200.gif)
 # Optimizer
 ## Cross entropy 
 ## Cross entropy with constant noise 
