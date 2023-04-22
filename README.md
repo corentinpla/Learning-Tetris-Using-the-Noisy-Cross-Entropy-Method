@@ -12,11 +12,13 @@ Following the approach of Thiery and Scherrer [2], we shall learn state-value fu
 | Maximum height  | $L$  | Maximum pile height  | Prevents from having a big pile  |
 | Holes  | $H$  | Number of empty cells covered by at least one full cell  | Prevents from making holes  |
 
-The value function : 
+The value function to optimise: 
 
-$V_w(s):=\sum_{i=1}^{10} w_i \h_i(s) + \sum_{i=1}^{9} w_{10+i} \Delta h_i(s)+ w_20L+w_21H$
+$$
+V_w(s):=\sum_{i=1}^{10} w_i h_i(s) + \sum_{i=1}^{9} w_{10+i}\Delta h_i(s) + w_{20}L + w_{21}H
+$$
 
-
+where $s$ denotes a Tetris state and $w=(w_1,w_2,...,w_{21})$ the weight vector to optimize.
 
 # Optimizer
 ## Cross entropy 
