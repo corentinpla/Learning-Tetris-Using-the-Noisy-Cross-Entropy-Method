@@ -33,7 +33,7 @@ where $s$ denotes a Tetris state and $w=(w_1,w_2,...,w_{21})$ the weight under w
 
 # Optimizer
 ## Cross entropy 
-An awesome illustration to understand this principle for $w=(w_1,w_2)$ is proposed in this [repo](https://github.com/amundim/cross_entropy_optimization) :
+An interesting illustration to understand this principle for $w=(w_1,w_2)$ is proposed in this [repo](https://github.com/amundim/cross_entropy_optimization) :
 * The red crosses : the 10 best vectors we select and use to estimate next round $\mathcal{N}\left(\mu, \sigma^2\right)$
 * The black dots : the next round 100 vectors we generate and test 
 ![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/cross_entropy_optimization.gif)
