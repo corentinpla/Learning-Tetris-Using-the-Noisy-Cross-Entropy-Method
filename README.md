@@ -41,7 +41,7 @@ An awesome illustration to understand this principle for $w=(w_1,w_2)$ is propos
 
 ## Cross entropy with constant noise 
 ## Simulated annealing
-#Further improvements
+# Further improvements
 # Bibliography 
 * [1] [Learning Tetris Using the Noisy Cross-Entropy Method](https://www.researchgate.net/publication/6743957_Learning_Tetris_Using_the_Noisy_Cross-Entropy_Method), I. Szita , A. Lorincz 
 * [2] [Improvements on Learning Tetris with Cross Entropy](https://inria.hal.science/inria-00418930/document), Christophe Thiery, Bruno Scherrer, INRIA
