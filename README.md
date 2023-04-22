@@ -2,6 +2,12 @@
 Project conducted as part of the second year Monte Carlo course at ENSAE.
 ## Main idea 
 The cross-entropy method is an efficient and general optimization algorithm. However, its applicability in reinforcement learning seems to be limited although it is fast, because it often converges to suboptimal policies. A standard technique for preventing early convergence is to introduce noise. We apply the noisy cross-entropy method to the game of Tetris to demonstrate its efficiency.
+## How to use it
+* `Tetris.py` implements the Tetris game and the state-value functions.
+* `CE_method.py` implements the classical cross-entropy method optimizer.
+* `CE_method_with_noise.py` implements the Noisy cross-entropy method (constant & decreasing noise).
+* `Simulated_annealing.py` implements the simulated annealing optimizer. 
+* `Main.py` to run full code.
 # Tetris controller
 Following the approach of Thiery and Scherrer [2], we shall learn state-value functions that are linear combination of 21 basis functions.
 
