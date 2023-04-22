@@ -6,11 +6,9 @@ from scipy.optimize import minimize
 import Tetris
 
 
-def simulation_CE_const_noise(alpha, N_mean, N_iteration,rho,noise): #alpha : taux d'actualistion 
-                               #N_mean: nombre de simulation par vecteur
+def simulation_CE_const_noise(alpha, N_iteration,rho,noise): #alpha : taux d'actualistion 
                                #N_iteration : nombre d'iterations
                                #rho : the fraction of verctors that are selected
-                               #retourne L_plot : le score maximal par itération
                                #noise : value of the constant noise to add 
                                
     # Initialisation
@@ -18,9 +16,9 @@ def simulation_CE_const_noise(alpha, N_mean, N_iteration,rho,noise): #alpha : ta
     sigma0 = np.diag([100]*21)
     V0 = (mu0, sigma0)
     parameters = [V0]
-    L_plot=[]
     t=1
 
+    L_plot=[]
 
     for j in range (N_iteration):
 
@@ -32,26 +30,23 @@ def simulation_CE_const_noise(alpha, N_mean, N_iteration,rho,noise): #alpha : ta
         # Evaluate each parameter pool
         N = 100
         sample_list = []
-        sample_mean = []
+        sample_score= []
 
         for i in range(N):
             
             sample = distribution.rvs() #vecteur de paramètre W
-            score_mean=[] #liste qui va contenir la moyenne des scores pour W sur N_mean parties
+            
 
-            for i in range(N_mean):
-                score_mean.append(Tetris.simulation_without_graphic(sample))
-
+            sample_score.append(Tetris.simulation(sample))
             sample_list.append(sample)
-            sample_mean.append(np.mean(score_mean))
-            print(np.mean(score_mean))
             
 
         # Keeping the rho*N bests vectors
         k=math.floor(N*rho)
 
-        indices=sorted(range(len(sample_mean)), key=lambda i: sample_mean[i], reverse=True)[:k]
+        indices=sorted(range(len(sample_score)), key=lambda i: sample_score[i], reverse=True)[:k]
         sample_high = [sample_list[i] for i in indices]
+        best_sample=sample_list[indices[0]]
     
 
         # New parameter estimation using MLE
@@ -60,7 +55,7 @@ def simulation_CE_const_noise(alpha, N_mean, N_iteration,rho,noise): #alpha : ta
         mean = np.mean(sample_high, axis = 0)
         cov =  np.cov(sample_high, rowvar = False)
         res = (mean, cov)
-        print(res)
+
 
         #add noise 
 
@@ -69,9 +64,18 @@ def simulation_CE_const_noise(alpha, N_mean, N_iteration,rho,noise): #alpha : ta
         parameters.append((alpha * np.array(res[0]) + (1 - alpha) * np.array(parameters[-1][0]),
                         alpha ** 2 * np.array(res[1]) + (1 - alpha) ** 2 * np.array(parameters[-1][1])+matrix_noise))    
 
-        L_plot.append(max(sample_mean))
-    
-    return(L_plot,(mean, cov))
+ #calcul de la moyenne du meilleur vecteur sur 30 parties
+        L_mean=[sample_score[indices[0]]] #liste des scores des 30 simulations
+        for k in range (29):
+            L_mean.append(Tetris.simulation(best_sample))
+
+        print(np.mean(L_mean))
+        L_plot.append(L_mean)
+        t+=1
+        print(L_plot,mean)
+        
+    return(L_plot, mean)
+
 
 
 def simulation_CE_deacr_noise(alpha, N_mean, N_iteration,rho,a,b): #alpha : taux d'actualistion 
@@ -87,9 +91,9 @@ def simulation_CE_deacr_noise(alpha, N_mean, N_iteration,rho,a,b): #alpha : taux
     sigma0 = np.diag([100]*21)
     V0 = (mu0, sigma0)
     parameters = [V0]
-    L_plot=[]
     t=1
 
+    L_plot=[]
 
     for j in range (N_iteration):
 
@@ -101,26 +105,23 @@ def simulation_CE_deacr_noise(alpha, N_mean, N_iteration,rho,a,b): #alpha : taux
         # Evaluate each parameter pool
         N = 100
         sample_list = []
-        sample_mean = []
+        sample_score= []
 
         for i in range(N):
-
             
             sample = distribution.rvs() #vecteur de paramètre W
-            score_mean=[] #liste qui va contenir la moyenne des scores pour W sur N_mean parties
-
-            for i in range(N_mean):
-                score_mean.append(Tetris.simulation_without_graphic(sample))
-
-            sample_list.append(sample)
-            sample_mean.append(np.mean(score_mean))
             
-            print(np.mean(score_mean))
+
+            sample_score.append(Tetris.simulation(sample))
+            sample_list.append(sample)
+            
+
         # Keeping the rho*N bests vectors
         k=math.floor(N*rho)
 
-        indices=sorted(range(len(sample_mean)), key=lambda i: sample_mean[i], reverse=True)[:k]
+        indices=sorted(range(len(sample_score)), key=lambda i: sample_score[i], reverse=True)[:k]
         sample_high = [sample_list[i] for i in indices]
+        best_sample=sample_list[indices[0]]
     
 
         # New parameter estimation using MLE
@@ -129,16 +130,25 @@ def simulation_CE_deacr_noise(alpha, N_mean, N_iteration,rho,a,b): #alpha : taux
         mean = np.mean(sample_high, axis = 0)
         cov =  np.cov(sample_high, rowvar = False)
         res = (mean, cov)
-        print(res)
+
 
         #add noise 
         noise = max(0, a-n/b)
-
         matrix_noise = np.diag([noise]*21)
 
         parameters.append((alpha * np.array(res[0]) + (1 - alpha) * np.array(parameters[-1][0]),
                         alpha ** 2 * np.array(res[1]) + (1 - alpha) ** 2 * np.array(parameters[-1][1])+matrix_noise))    
 
-        L_plot.append(max(sample_mean))
-    
+ #calcul de la moyenne du meilleur vecteur sur 30 parties
+        L_mean=[sample_score[indices[0]]] #liste des scores des 30 simulations
+        for k in range (29):
+            L_mean.append(Tetris.simulation(best_sample))
+
+        print(np.mean(L_mean))
+        L_plot.append(L_mean)
+        t+=1
+        print(L_plot,(mean, cov))
     return(L_plot,(mean, cov))
+
+
+     
