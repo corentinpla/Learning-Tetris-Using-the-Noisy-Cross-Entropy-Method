@@ -5,28 +5,16 @@ The cross-entropy method is an efficient and general optimization algorithm. How
 # Tetris controller
 Following the approach of Thiery and Scherrer [2], we shall learn state-value functions that are linear combination of 21 basis functions.
 
-$$
-\begin{array}{|l|l|l|l|}
-\hline \text { Feature } & \text { Id } & \text { Description } & \text { Comments } \\
-\hline \text { Column height } & h_p & \text { Height of the } p \text { th column of the board } & \begin{array}{l}
-\text { There are } P \text { such features } \\
-\text { where } P \text { is the board width }
-\end{array} \\
-\hline \text { Column difference } & \Delta h_p & \begin{array}{l}
-\text { Absolute difference }\left|h_p-h_{p+1}\right| \text { be- } \\
-\text { tween adjacent columns }
-\end{array} & \begin{array}{l}
-\text { There are } P-1 \text { such features } \\
-\text { where } P \text { is the board width }
-\end{array} \\
-\hline \text { Maximum height } & H & \text { Maximum pile height: } \max _p h_p & \text { Prevents from having a big pile } \\
-\hline \text { Holes } & L & \begin{array}{l}
-\text { Number of empty cells covered by at } \\
-\text { least one full cell }
-\end{array} & \text { Prevents from making holes } \\
-\hline
-\end{array}
-$$
+| Feature  | Id | Description  | Comments |
+| ------------- | ------------- | ------------- | ------------- |
+| Column height   | $h_p$ | Height of the $p$ th column of the board  | There are $P$ such features where $P$ is the board width  |
+| Column difference  | $\Delta h_p$  | Absolute difference $\mid h_p − h_{p+1} \mid$ between adjacent columns  | There are $P − 1$ such features where $P$ is the board width  |
+| Maximum height  | $L$  | Maximum pile height  | Prevents from having a big pile  |
+| Holes  | $H$  | Number of empty cells covered by at least one full cell  | Prevents from making holes  |
+
+The value function : 
+
+
 
 # Optimizer
 ## Cross entropy 
