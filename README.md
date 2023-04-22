@@ -5,16 +5,18 @@
   <summary>Table des Matières</summary>
   <ol>
     <li>
-      <a href="#Idée-Principale">Idée principale</a>
+      <a href="#Main idea">Main idea</a>
     </li>
-    <li><a href="#Utilisation">Utilisation</a></li>
+    <li><a href="#Tetris controller">Tetris controller</a></li>
+    
+    <li><a href="#Optimisation & results">Optimisation</a></li>
     <ul>
-        <li><a href="#Stats-Des">Statistiques Descriptives</a></li>
-        <li><a href="#Modélisation">Modélisation</a></li>
-      <li><a href="#Code-Principal">Code principal</a></li>
-      <li><a href="#Données">Données</a></li>
+        <li><a href="#Cross entropy">Statistiques Descriptives</a></li>
+        <li><a href="#Cross entropy with constant noise">Modélisation</a></li>
+      <li><a href="#Cross entropy with decreasing noise">Code principal</a></li>
+      <li><a href="#Simulated annealing">Données</a></li>
      </ul>
-    <li><a href="#Contact">Contact</a></li>
-    <li><a href="#Bibliographie">Bibliographie</a></li>
+    <li><a href="#Bibliography">Bibliography</a></li>
+    <li><a href="#Contacts">Contacts</a></li>
   </ol>
 </details>
