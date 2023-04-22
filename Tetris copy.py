@@ -182,17 +182,17 @@ def evaluate(W, field):
 def evaluate_best_move(W,field,type):
     L=[]
     score=[]
-    for col in range (-5,10):
+    for col in range (-5,7):
         for k in range (4):
             game_copy=Tetris(20,10)
             
             game_copy.field=copy.deepcopy(field)
-            #point_before=game_copy.score
+
             game_copy.new_figure(type,3,0)
+            
             game_copy.go_side(col)
             game_copy.rotate(k) #test intersect deja fait dans la methode rotate
             game_copy.go_space()
-            #point=game_copy.score
             score.append(evaluate(W,game_copy.field))
             L.append([col,k])
     
