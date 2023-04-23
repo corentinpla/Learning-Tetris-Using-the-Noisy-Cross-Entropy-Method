@@ -224,7 +224,6 @@ def simulation(W):
         
         else:
             game.go_space(color)
-        print(game.score)
 
     return(game.score)
 
