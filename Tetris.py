@@ -194,11 +194,15 @@ def evaluate_best_move(W,field,type,color):
             game_copy.rotate(k)
             game_copy.go_side(col) 
             game_copy.go_space(color)
-            score.append(evaluate(W,game_copy.field))
-            L.append([col,k])
-    
-    best_move=score.index(min(score))
-    return(L[best_move])
+
+            if not game.intersects():
+                score.append(evaluate(W,game_copy.field))
+                L.append([col,k])
+    if len(L)>0:
+        best_move=score.index(min(score))
+        return(L[best_move])
+    else : 
+        return([0,0])
 
 #simule une partie 
 def simulation(W):
@@ -210,18 +214,21 @@ def simulation(W):
         fig=random.randint(0,6)
         color=1
         game.new_figure(fig,3,0)
-        if game.intersects():
-            game.state="gameover"
 
         col, rot = evaluate_best_move(W,game.field,fig,color)
         game.rotate(rot)
         game.go_side(col)
-        game.go_space(color)
+
+        if game.intersects():
+            game.state="gameover"
+        
+        else:
+            game.go_space(color)
 
 
     return(game.score)
 
-def simulation_gif(W):
+def simulation_gif(W): #Pas encore optimisé pour les pièces qui arrivent en haut
     L=[]
 
     game = Tetris(20, 10)
@@ -247,7 +254,7 @@ def simulation_gif(W):
     return(L)  
 
 
-def get_gif (L): #L: list of figures
+def get_gif (L): #L: list of figures as returned by simulation_gif
     with imageio.get_writer('tetris.gif', mode='I') as writer:
 
         for fig in L:

@@ -19,6 +19,7 @@ def simulation_CE_const_noise(alpha, N_iteration,rho,noise): #alpha : taux d'act
     t=1
 
     L_plot=[]
+    L_norm=[]
 
     for j in range (N_iteration):
 
@@ -72,13 +73,13 @@ def simulation_CE_const_noise(alpha, N_iteration,rho,noise): #alpha : taux d'act
         print(np.mean(L_mean))
         L_plot.append(L_mean)
         t+=1
-        print(L_plot,mean)
-        
+        print(L_plot,L_norm,mean)
+
     return(L_plot, mean)
 
 
 
-def simulation_CE_deacr_noise(alpha, N_mean, N_iteration,rho,a,b): #alpha : taux d'actualistion 
+def simulation_CE_deacr_noise(alpha, N_iteration,rho,a,b): #alpha : taux d'actualistion 
                                    #N_mean: nombre de simulation par vecteur
                                    #N_iteration : nombre d'iterations
                                    #rho : the fraction of verctors that are selected
@@ -94,7 +95,7 @@ def simulation_CE_deacr_noise(alpha, N_mean, N_iteration,rho,a,b): #alpha : taux
     t=1
 
     L_plot=[]
-
+    L_norm=[]
     for j in range (N_iteration):
 
 
@@ -131,9 +132,9 @@ def simulation_CE_deacr_noise(alpha, N_mean, N_iteration,rho,a,b): #alpha : taux
         cov =  np.cov(sample_high, rowvar = False)
         res = (mean, cov)
 
-
+        L_norm.append(np.linalg.norm(cov))
         #add noise 
-        noise = max(0, a-n/b)
+        noise = max(0, a-N/b)
         matrix_noise = np.diag([noise]*21)
 
         parameters.append((alpha * np.array(res[0]) + (1 - alpha) * np.array(parameters[-1][0]),
@@ -147,8 +148,8 @@ def simulation_CE_deacr_noise(alpha, N_mean, N_iteration,rho,a,b): #alpha : taux
         print(np.mean(L_mean))
         L_plot.append(L_mean)
         t+=1
-        print(L_plot,(mean, cov))
-    return(L_plot,(mean, cov))
+        print(L_plot,L_norm,mean)
+    return(L_plot, L_norm,mean)
 
 
      

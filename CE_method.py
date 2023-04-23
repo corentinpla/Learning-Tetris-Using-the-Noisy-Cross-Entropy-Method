@@ -13,7 +13,7 @@ def simulation_CE(alpha, N_iteration,rho): #alpha : taux d'actualistion
                                #rho : the fraction of verctors that are selected
     
     # Initialisation
-    mu0 = [0]*21
+    mu0 = [5]*21
     sigma0 = np.diag([100]*21)
     V0 = (mu0, sigma0)
     parameters = [V0]
@@ -52,8 +52,8 @@ def simulation_CE(alpha, N_iteration,rho): #alpha : taux d'actualistion
 
         mean = np.mean(sample_high, axis = 0)
         cov =  np.cov(sample_high, rowvar = False,bias=True)
-
         res = (mean, cov)
+
         L_norm.append(np.linalg.norm(cov)) #norme 2 de la matrice de covariance
 
         parameters.append((alpha * np.array(res[0]) + (1 - alpha) * np.array(parameters[-1][0]),
@@ -67,8 +67,8 @@ def simulation_CE(alpha, N_iteration,rho): #alpha : taux d'actualistion
         print(np.mean(L_mean))
         L_plot.append(L_mean)
         t+=1
-        print(L_plot,L_norm,(mean, cov))
-    return(L_plot,L_norm,(mean, cov))
+        print(L_plot,L_norm,mean)
+    return(L_plot,L_norm,mean)
     #L_plot : liste de liste des scores de 30 simulations pour le meilleur vecteur 
     #L_norm : norme 2 de la matrice au cours du temps 
     #(mean,cov) : paramètres retenus (cov : matrice nulle à la convergence)
