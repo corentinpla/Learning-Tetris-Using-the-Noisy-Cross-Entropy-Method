@@ -1,8 +1,8 @@
 # Learning Tetris using the noisy Cross Entropy method
-Project conducted as part of the second year Monte Carlo course at ENSAE.
+Project conducted as part of the second year Monte Carlo course at ENSAE. Most of the explanations belows are extracts from preexisting articles (see bibliography), however, the resutlts are ours.
 ## Main idea 
 The cross-entropy method is an efficient and general optimization algorithm. However, its applicability in reinforcement learning seems to be limited although it is fast, because it often converges to suboptimal policies. A standard technique for preventing early convergence is to introduce noise. We apply the noisy cross-entropy method to the game of Tetris to demonstrate its efficiency.
-## How to use it
+## Code
 * `Tetris.py` implements the Tetris game and the state-value functions.
 * `CE_method.py` implements the classical cross-entropy method optimizer.
 * `CE_method_with_noise.py` implements the Noisy cross-entropy method (constant & decreasing noise).
@@ -26,18 +26,20 @@ $$
 where $s$ denotes a Tetris state and $w=(w_1,w_2,...,w_{21})$ the weight under which optimize.
 
 
-**A Tetris simulation for an optimised weight vector :**
+**One of our Tetris simulation for an optimised weight vector:**
 ![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/Tetris.gif)
 
-
+See `Tetris.py` for the gif generator. 
 
 # Optimizer
 ## Cross entropy 
+### Presentation
 An interesting illustration to understand this principle for $w=(w_1,w_2)$ is proposed in this [repo](https://github.com/amundim/cross_entropy_optimization) :
 * The red crosses : the 10 best vectors we select and use to estimate next round $\mathcal{N}\left(\mu, \sigma^2\right)$
 * The black dots : the next round 100 vectors we generate and test 
 ![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/cross_entropy_optimization.gif)
 
+### Results 
 
 ## Cross entropy with constant noise 
 ## Simulated annealing
