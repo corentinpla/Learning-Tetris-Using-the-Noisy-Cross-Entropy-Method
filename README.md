@@ -1,5 +1,5 @@
 # Learning Tetris using the noisy Cross Entropy method
-Project conducted as part of the second year Monte Carlo course at ENSAE. Most of the explanations belows are extracts from preexisting articles (see bibliography), however, the resutlts are ours.
+Project conducted as part of the second year Monte Carlo course at ENSAE. Most of the explanations belows are extracts from preexisting articles (see bibliography), however, the results are ours.
 ## Main idea 
 The cross-entropy method is an efficient and general optimization algorithm. However, its applicability in reinforcement learning seems to be limited although it is fast, because it often converges to suboptimal policies. A standard technique for preventing early convergence is to introduce noise. We apply the noisy cross-entropy method to the game of Tetris to demonstrate its efficiency.
 ## Code
@@ -27,9 +27,9 @@ where $s$ denotes a Tetris state and $w=(w_1,w_2,...,w_{21})$ the weight under w
 
 
 **One of our Tetris simulation for an optimised weight vector:**
+
 ![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/Tetris.gif)
 
-See `Tetris.py` for the gif generator. 
 
 # Optimizer
 ## Cross entropy 
