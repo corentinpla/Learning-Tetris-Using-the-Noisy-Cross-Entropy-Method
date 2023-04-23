@@ -27,7 +27,7 @@ $$
 where $s$ denotes a Tetris state and $w=(w_1,w_2,...,w_{21})$ the weight under which optimize.
 
 
-**One of our Tetris simulation for an optimised weight vector:**
+**One of our Tetris simulation for an optimised weight vector (for gif generator see `Tetris.py`) :**
 
 ![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/Tetris.gif)
 
