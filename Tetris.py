@@ -193,9 +193,10 @@ def evaluate_best_move(W,field,type,color):
             game_copy.new_figure(type,3,0)
             game_copy.rotate(k)
             game_copy.go_side(col) 
-            game_copy.go_space(color)
+            
 
-            if not game.intersects():
+            if game_copy.intersects()==False:
+                game_copy.go_space(color)
                 score.append(evaluate(W,game_copy.field))
                 L.append([col,k])
     if len(L)>0:
@@ -218,13 +219,12 @@ def simulation(W):
         col, rot = evaluate_best_move(W,game.field,fig,color)
         game.rotate(rot)
         game.go_side(col)
-
         if game.intersects():
             game.state="gameover"
         
         else:
             game.go_space(color)
-
+        print(game.score)
 
     return(game.score)
 
