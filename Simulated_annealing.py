@@ -87,4 +87,4 @@ def simulation_SA(alpha, update_rate, N_mean, N_iteration, rho, output_file):
         T = T * update_rate
         t +=1
 
-    return (L_plot, (mean, cov))
+    return (L_plot, L_norm, mean)
