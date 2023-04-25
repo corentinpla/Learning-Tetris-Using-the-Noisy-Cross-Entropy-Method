@@ -41,14 +41,38 @@ An interesting illustration to understand this principle for $w=(w_1,w_2)$ is pr
 ![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/cross_entropy_optimization.gif)
 
 ### Results 
+![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/simulation%20CE(1%2C%20100%2C0.1%2C5%2C100).png)
+
 
 ## Cross entropy with constant noise 
-## Simulated annealing
+### Presentation
+
+### Results 
+![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/simulation%20CE%20const%20noise(1%2C%20100.0.1.5.100)-2.png)
+
+
+## Cross entropy with decreasing noise 
+### Presentation
+
+### Results 
+![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/simulation_CE_deacr_noise(1%2C100%2C0.1%2C5%2C100).png)
+<p align="center">
+  <img src="https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/comparaison_of_the_3_opti.png"/>
+</p>
+
+
 # Further improvements
+* Try a two pieces Tetris controller 
+* Use new features in the controller 
+* Optimize the hyperparameters
+* Simulated annealing optimizer
+
 # Bibliography 
 * [1] [Learning Tetris Using the Noisy Cross-Entropy Method](https://www.researchgate.net/publication/6743957_Learning_Tetris_Using_the_Noisy_Cross-Entropy_Method), I. Szita , A. Lorincz 
 * [2] [Improvements on Learning Tetris with Cross Entropy](https://inria.hal.science/inria-00418930/document), Christophe Thiery, Bruno Scherrer, INRIA
 * [3] [A Tutorial on the Cross-Entropy Method](https://link.springer.com/article/10.1007/s10479-005-5724-z), Pieter-Tjerk de Boer, Dirk P. Kroese, Shie Mannor, Reuven Y. Rubinstein
+
+
 # Contacts
 
 * Grégoire Brugère - gregoire.brugere@ensae.fr  
