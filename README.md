@@ -73,6 +73,7 @@ An interesting illustration to understand this principle for $w=(w_1,w_2)$ is pr
 * [3] [A Tutorial on the Cross-Entropy Method](https://link.springer.com/article/10.1007/s10479-005-5724-z), Pieter-Tjerk de Boer, Dirk P. Kroese, Shie Mannor, Reuven Y. Rubinstein
 
 
+
 # Contacts
 
 * Grégoire Brugère - gregoire.brugere@ensae.fr  
