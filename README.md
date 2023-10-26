@@ -29,7 +29,7 @@ where $s$ denotes a Tetris state and $w=(w_1,w_2,...,w_{21})$ the weight under w
 
 **One of our Tetris simulation for an optimised weight vector (for gif generator see `Tetris.py`) :**
 
-![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/Tetris.gif)
+![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/figures/Tetris.gif)
 
 
 # Optimizer
@@ -38,26 +38,26 @@ where $s$ denotes a Tetris state and $w=(w_1,w_2,...,w_{21})$ the weight under w
 An interesting illustration to understand this principle for $w=(w_1,w_2)$ is proposed in this [repo](https://github.com/amundim/cross_entropy_optimization) :
 * The red crosses : the 10 best vectors we select and use to estimate next round $\mathcal{N}\left(\mu, \sigma^2\right)$
 * The black dots : the next round 100 vectors we generate and test 
-![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/cross_entropy_optimization.gif)
+![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/figures/cross_entropy_optimization.gif)
 
 ### Results 
-![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/simulation%20CE(1%2C%20100%2C0.1%2C5%2C100).png)
+![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/figures/simulation%20CE(1%2C%20100%2C0.1%2C5%2C100).png)
 
 
 ## Cross entropy with constant noise 
 ### Presentation
 
 ### Results 
-![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/simulation%20CE%20const%20noise(1%2C%20100.0.1.5.100)-2.png)
+![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/figures/simulation%20CE%20const%20noise(1%2C%20100.0.1.5.100)-2.png)
 
 
 ## Cross entropy with decreasing noise 
 ### Presentation
 
 ### Results 
-![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/simulation_CE_deacr_noise(1%2C100%2C0.1%2C5%2C100).png)
+![](https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/figures/simulation_CE_deacr_noise(1%2C100%2C0.1%2C5%2C100).png)
 <p align="center">
-  <img src="https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/comparaison_of_the_3_opti.png"/>
+  <img src="https://github.com/corentinpla/Learning-Tetris-Using-the-Noisy-Cross-Entropy-Method/blob/main/figures/comparaison_of_the_3_opti.png"/>
 </p>
 
 
